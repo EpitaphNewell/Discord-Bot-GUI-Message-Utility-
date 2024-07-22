@@ -5,7 +5,7 @@ from discord.ext import commands
 import asyncio
 import os
 
-TOKEN = 'YOUR-TOKEN'
+TOKEN = 'YOUR_TOKEN'
 intents = discord.Intents.default()
 intents.message_content = True
 intents.guilds = True
@@ -40,7 +40,6 @@ async def send_message(content, file=None):
                 else:
                     await channel.send(content)
                 update_console(f"Message sent: {content}")
-                log_message(f"Message sent: {content}")
             except Exception as e:
                 update_console(f"Failed to send message: {e}")
         else:
@@ -91,8 +90,10 @@ def on_send(event=None):
 
 def select_file():
     file = filedialog.askopenfilename(filetypes=[("All files", "*.*")])
+    filename = os.path.basename(file)
     if file:
         file_path.set(file)
+        update_console(f"File sent: {filename}")
 
 def run_gui():
     global entry, console, file_path, user_listbox, guild_id, channel_id
@@ -152,7 +153,8 @@ def show_server_and_channel_selection():
         if guild:
             channels = guild.text_channels
             for ch in channels:
-                channel_listbox.insert(tk.END, ch.name)
+                channel_name = ch.name
+                channel_listbox.insert(tk.END, channel_name)
             channel_listbox.bind('<<ListboxSelect>>', on_channel_select)
         await update_user_list()
 
@@ -161,6 +163,8 @@ def show_server_and_channel_selection():
         selected_server_index = server_listbox.curselection()
         if selected_server_index:
             guild_id = bot.guilds[selected_server_index[0]].id
+            guild_name = bot.guilds[selected_server_index[0]].name
+            update_console(f"Server set: {guild_name}")
             asyncio.run_coroutine_threadsafe(update_channel_list(), bot.loop)
 
     def on_channel_select(event):
@@ -168,6 +172,8 @@ def show_server_and_channel_selection():
         selected_channel_index = channel_listbox.curselection()
         if selected_channel_index:
             channel_id = channels[selected_channel_index[0]].id
+            channel_name = channels[selected_channel_index[0]].name
+            update_console(f"Channel set: {channel_name}")
 
     guilds = bot.guilds
     for guild in guilds:
