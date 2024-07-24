@@ -1,3 +1,4 @@
+<img src="https://i.ibb.co/ZWgyHjG/16.png" alt="16" border="0" />
 # Discord Bot GUI (Message Utility)
 **Discord Bot GUI** is a graphical user interface (GUI) application for managing a Discord server. This bot allows you to send messages, view server members, and manage message logs from a user-friendly interface.
 
