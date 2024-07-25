@@ -2,7 +2,7 @@
 
 # Documentation for Using JSON to Create Application Styles
 
-This documentation explains how to use a JSON file to customize the styles of your Python application using Tkinter. You can change the appearance of various interface elements such as text areas, buttons, and user lists.
+This documentation explains how to use a JSON file to customize the styles of DBG
 
 ## Style File
 
